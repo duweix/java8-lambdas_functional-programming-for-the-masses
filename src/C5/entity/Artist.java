@@ -36,4 +36,14 @@ public class Artist {
 		return "Artist [name=" + name + ", members=" + members + ", isSolo=" + isSolo + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj == null ? false : this.hashCode() == obj.hashCode();
+	}
+
 }
