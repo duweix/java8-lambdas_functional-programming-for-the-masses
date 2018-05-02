@@ -12,13 +12,15 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import C5.entity.Album;
 import C5.entity.Artist;
+import C5.entity.Track;
 import junit.framework.TestCase;
 
 public class S5_3 extends TestCase {
 
 	/**
-	 * 便5-5 使用toCollection，用定制的集合收集元素
+	 * 例5-5 使用toCollection，用定制的集合收集元素
 	 */
 	@Test
 	public void testCase_E5_5() {
@@ -28,7 +30,7 @@ public class S5_3 extends TestCase {
 	}
 
 	/**
-	 * 便5-6 找出成员最多的乐队
+	 * 例5-6 找出成员最多的乐队
 	 */
 	@Test
 	public void testCase_E5_6() {
@@ -49,4 +51,33 @@ public class S5_3 extends TestCase {
 		return artists.collect(Collectors.maxBy(Comparator.comparing(getCount)));
 	}
 
+	/**
+	 * 例5-7 找出一组专辑上曲目的平均数
+	 */
+	@Test
+	public void testCase_E5_7() {
+		List<Album> albums = new ArrayList<>();
+
+		Album album;
+		Track track;
+		List<Track> trackList;
+
+		album = new Album();
+		trackList = new ArrayList<>();
+		track = new Track();
+		trackList.add(track);
+		album.setTrackList(trackList);
+		albums.add(album);
+
+		album = new Album();
+		trackList = new ArrayList<>();
+		album.setTrackList(trackList);
+		albums.add(album);
+
+		assertEquals(0.5D, averageNumberOfTracks(albums));
+	}
+
+	private double averageNumberOfTracks(List<Album> albums) {
+		return albums.stream().collect(Collectors.averagingInt(album -> album.getTrackList().size()));
+	}
 }
