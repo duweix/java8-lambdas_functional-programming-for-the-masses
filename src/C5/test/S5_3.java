@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import C5.collector.StringCollector;
 import C5.entity.Album;
 import C5.entity.Artist;
 import C5.entity.Track;
@@ -231,5 +232,29 @@ public class S5_3 extends TestCase {
 		Map<Artist, List<String>> nameOfAlbums = albums.stream().collect(
 				Collectors.groupingBy(Album::getMainMusician, Collectors.mapping(Album::getName, Collectors.toList())));
 		assertEquals(2, nameOfAlbums.size());
+	}
+
+	/**
+	 * 例5-20 使用reduce和StringCombiner类格式化艺术家姓名
+	 */
+	@Test
+	public void testCase_E5_020() {
+		List<Artist> artists = new ArrayList<>();
+		Artist artist;
+
+		artist = new Artist();
+		artist.setName("ZhangSan");
+		artists.add(artist);
+
+		artist = new Artist();
+		artist.setName("WangErMaZi");
+		artists.add(artist);
+
+		artist = new Artist();
+		artist.setName("Lisi");
+		artists.add(artist);
+
+		String result = artists.stream().map(Artist::getName).collect(new StringCollector(", ", "[", "]"));
+		assertEquals("[ZhangSan, WangErMaZi, Lisi]", result);
 	}
 }
