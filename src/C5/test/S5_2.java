@@ -1,4 +1,4 @@
-package C5;
+package C5.test;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
