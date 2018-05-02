@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.TreeSet;
 import java.util.function.Function;
@@ -79,5 +80,33 @@ public class S5_3 extends TestCase {
 
 	private double averageNumberOfTracks(List<Album> albums) {
 		return albums.stream().collect(Collectors.averagingInt(album -> album.getTrackList().size()));
+	}
+
+	/**
+	 * 例5-8 将艺术家组成的流分成乐队和独唱歌手两部分
+	 */
+	@Test
+	public void testCase_E5_8() {
+		List<Artist> artists = new ArrayList<>();
+		Artist artist = null;
+
+		artist = new Artist();
+		artist.setSolo(true);
+		artists.add(artist);
+
+		artist = new Artist();
+		artist.setSolo(false);
+		artists.add(artist);
+
+		artist = new Artist();
+		artist.setSolo(true);
+		artists.add(artist);
+
+		Map<Boolean, List<Artist>> artistsGrouped = artists.stream()
+				.collect(Collectors.partitioningBy(_artist -> _artist.isSolo()));
+		// 例5-9 使用方法引用将艺术家组成的Stream分成乐队和独唱歌手两部分
+		// Map<Boolean, List<Artist>> artistsGrouped = artists.stream()
+		// .collect(Collectors.partitioningBy(Artist::isSolo));
+		assertEquals(2, artistsGrouped.size());
 	}
 }
