@@ -14,9 +14,9 @@ import java.util.stream.Stream;
 import org.junit.Test;
 
 import C5.collector.StringCollector;
-import C5.entity.Album;
-import C5.entity.Artist;
-import C5.entity.Track;
+import entity.Album;
+import entity.Artist;
+import entity.Track;
 import junit.framework.TestCase;
 
 public class S5_3 extends TestCase {

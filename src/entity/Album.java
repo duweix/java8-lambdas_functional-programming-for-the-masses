@@ -1,4 +1,4 @@
-package C5.entity;
+package entity;
 
 import java.util.List;
 
